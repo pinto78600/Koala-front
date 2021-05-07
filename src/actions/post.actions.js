@@ -29,7 +29,7 @@ export const getPosts = (num, blocked) => {
     return (dispatch) => {
         return axios({
             method: 'get',
-            url: `${process.env.REACT_APP_API_URL}api/post`,
+            url: `https://mern-koala.herokuapp.com/api/post`,
         })
         .then(res => {
             if(!isEmpty(blocked)){
