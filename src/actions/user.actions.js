@@ -24,17 +24,10 @@ export const getUser = uid => {
     };
 };
 
-export const uploadPicture = (dataPic, id) => {
+export const uploadPicture = (data, id) => {
     return (dispatch) => {
-        return axios({
-            method:'post',
-            url:`${process.env.REACT_APP_API_URL}api/user/upload`,
-            data: {dataPic},
-            headers:{
-                'Access-Control-Allow-Origin': '*',
-            }
-        }) 
-            // .post(`${process.env.REACT_APP_API_URL}api/user/upload`, data)
+        return axios 
+            .post(`${process.env.REACT_APP_API_URL}api/user/upload`, data)
             .then(res => {
                 if(res.data.errors){
                     dispatch({ type : GET_USER_ERRORS, payload : res.data.errors})
