@@ -151,15 +151,6 @@ const ProfilFriend = ( { uidFriend } ) => {
                         </div>
                     </div>
                     <div className='container-post-chat' >
-                        <div className='post-user'>
-                        <ul>
-                            {!isEmpty(postUser[0]) && 
-                                postUser.map(post => {
-                                    return  <Card post={post} key={post._id}/>
-                                })
-                            }
-                        </ul>
-                        </div>
                         <div className='chat-user' >
                             {isEmpty(roomChat) ? (
                                     <form action='' onSubmit={handleCreate}>
@@ -178,6 +169,15 @@ const ProfilFriend = ( { uidFriend } ) => {
                                     />
                                 )
                             } 
+                        </div>
+                        <div className='post-user'>
+                            <ul>
+                                {!isEmpty(postUser[0]) && 
+                                    postUser.map(post => {
+                                        return  <Card post={post} key={post._id}/>
+                                    })
+                                }
+                            </ul>
                         </div>
                     </div>
                     </>

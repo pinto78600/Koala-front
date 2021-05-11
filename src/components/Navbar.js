@@ -26,11 +26,8 @@ const Navbar = () => {
                         <li></li>
                         <li className="welcome">
                             <NavLink exact to='/profil'>
-                                <h5>Bienvenue {userData.pseudo}</h5>
+                                <img src={userData.picture} alt='userPic' style={{ width : '40px' , borderRadius : '50%' , maxHeight : '40px'}} />
                             </NavLink>
-                        </li>
-                        <li>
-                            <img src={userData.picture} alt='userPic' style={{ width : '40px' , borderRadius : '50%' , maxHeight : '40px'}} />
                         </li>
                         <Logout/>
                     </ul>
