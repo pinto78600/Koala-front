@@ -1,6 +1,6 @@
 nav {
   position: fixed;
-  width: 100%;
+  width:  100%;
   height: 45px;
   border-radius: 6px;
   box-shadow: 18px 1px 0px $color-1, 22px 4px 0px 0px $shadow;
@@ -32,6 +32,10 @@ nav {
     height: 45px;
     align-items: center;
     
+    @media screen and(max-width: 1251px) {
+    justify-content:flex-start;
+    }
+    
     .logo {
       display: flex;
       align-items: center;
@@ -57,6 +61,10 @@ nav {
       
       .welcome {
         transform: translateY(2px);
+
+        img{
+          margin: 30px;
+        }
         
         h5 {
           font-family: $font-3;
