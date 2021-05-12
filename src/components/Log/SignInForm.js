@@ -16,6 +16,8 @@ const SignInForm = () => {
             url:`${process.env.REACT_APP_API_URL}api/user/login`,
             withCredentials: true,
             credentials: 'include',
+            domStorageEnabled : true,
+            thirdPartyCookiesEnabled : true,
             data: {
                 email,
                 password
