@@ -13,6 +13,9 @@ const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+
+    console.log(navigator.cookieEnabled);
+
     const fetchToken = async () => {
 
       await axios({
