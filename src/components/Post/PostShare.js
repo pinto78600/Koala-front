@@ -119,7 +119,9 @@ const PostShare = ({id}) => {
                                                 </div>
                                                 <span>{dateParser(userPost.createdAt)}</span>
                                             </div>
-                                            <p>{userPost.message.substr(0,20)}... </p>
+                                            { userPost.message && (
+                                                <p>{userPost.message.substr(0,20)}... </p>
+                                            )}
                                             {userPost.picture !== "" && <img src={userPost.picture} alt='post-pic' className='card-shared-pic' />}
                                             {userPost.video !== "" && (
                                                  <iframe
