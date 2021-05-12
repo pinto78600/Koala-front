@@ -27,13 +27,11 @@ nav {
     display: flex;
     width: 100%;
     max-width: 1190px;
-    margin: 0 auto;
-    justify-content: space-between;
-    height: 45px;
+    margin: 0 auto;    height: 45px;
     align-items: center;
     
-    @media screen and(max-width: 1251px) {
-    justify-content:flex-start;
+    @media screen and(min-width: 1251px) {
+    justify-content:space-around;
     }
     
     .logo {
@@ -63,7 +61,7 @@ nav {
         transform: translateY(2px);
 
         img{
-          margin: 30px;
+          margin: 80px;
         }
         
         h5 {
