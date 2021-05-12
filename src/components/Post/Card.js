@@ -179,7 +179,7 @@ const Card = ({ post }) => {
                             <span>{post.comments.length}</span>
                         </div>
                         <LikeButton post={post} />
-                        {isEmpty(post.share) && userData._id !== post.posterId && <PostShare id={post._id} /> }
+                        {userData._id && isEmpty(post.share) && userData._id !== post.posterId && <PostShare id={post._id} /> }
                     </div>
                     {showComments && <CardComment post={post} />}
                 </div>
