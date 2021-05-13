@@ -15,7 +15,9 @@ const UploadImg = () => {
         data.append('file', file);
 
         dispatch(uploadPicture(data, userData._id));
-        document.location.reload();
+        setTimeout(() => {
+            document.location.reload();
+        }, 2000)
     }
 
     return (
