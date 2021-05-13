@@ -26,6 +26,7 @@ const NewPostForm = () => {
 
     const handlePost = async () => {
         if(message || postPicture || video) {
+            setLoadPost(true);
             const data = new FormData();
             data.append('posterId', userData._id);
             data.append('message', message);
@@ -36,7 +37,6 @@ const NewPostForm = () => {
             dispatch(getPosts());
             cancelPost();
             
-            setLoadPost(true);
         }else {
             alert('Veuillez entrer un message')
         }
