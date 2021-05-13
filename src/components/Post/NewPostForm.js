@@ -71,8 +71,7 @@ const NewPostForm = () => {
     }, [userData, message, video])
 
     useEffect(() => {
-       if(error === 'No error' || !isEmpty(error)) setLoadPost(false);
-
+       if(error === 'No error' || !isEmpty(error.format) || !isEmpty(error.maxSize) ) setLoadPost(false);
     },[loadPost, error])
 
     return (
