@@ -11,6 +11,7 @@ const NewPostForm = () => {
     const [postPicture, setPostPicture] = useState(null);
     const [video, setVideo] = useState('');
     const [file, setFile] = useState();
+    const [loadPost, setLoadPost] = useState(false);
 
     const userData = useSelector(state => state.userReducer);
     const error = useSelector(state => state.errorReducer.postErrors);
@@ -34,7 +35,8 @@ const NewPostForm = () => {
             await dispatch(addPost(data));
             dispatch(getPosts());
             cancelPost();
-
+            
+            setLoadPost(true);
         }else {
             alert('Veuillez entrer un message')
         }
@@ -67,6 +69,11 @@ const NewPostForm = () => {
         };
         handleVideo()
     }, [userData, message, video])
+
+    useEffect(() => {
+        error === 'No error' && setLoadPost(false);
+
+    },[loadPost, error])
 
     return (
         <div className='post-container'>
@@ -145,7 +152,16 @@ const NewPostForm = () => {
                                 )
                                 : null
                                 }
-                                <button className='send' onClick={handlePost}>Envoyer</button>
+                                {loadPost ? (
+                                    <div className='icon' >
+                                        <i className='fas fa-spinner fa-pulse'></i>
+                                    </div>
+                                )
+                                :
+                                (
+                                    <button className='send' onClick={handlePost}>Envoyer</button>                                    
+                                )
+                                }
                             </div>
                         </div>
                     </div>
