@@ -91,7 +91,7 @@ const ProfilFriend = ( { uidFriend } ) => {
         }
            
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [loadMessages, uid, loadData, dispatch, uidFriend, count, blocked]) 
+    }, [loadMessages, uid, loadData, dispatch, uidFriend, count, blocked, handleCreate]) 
     
     return (
         <>
@@ -130,7 +130,8 @@ const ProfilFriend = ( { uidFriend } ) => {
                             )}
                             {isEmpty(roomChat) &&  <form action='' onSubmit={handleCreate}>
                                         <input type='submit' value='Envoyer message' />
-                                        </form>}                        </div>
+                                        </form>}                        
+                        </div>
                         <div className='right-part' >
                             <div className='bio-update' >
                                 <h3>Bio</h3>
