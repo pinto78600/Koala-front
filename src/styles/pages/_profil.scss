@@ -274,6 +274,9 @@
       transform: scaleY(0);
       transform-origin: center;
       animation: modal .5s forwards;
+      @media screen and(max-width : 600px) {
+        left: 40%;
+      }
 
       h3 {
         min-width: 200px;
@@ -332,6 +335,9 @@
           h4 {
             text-align: left;
             min-width: 210px;
+            @media screen and(max-width : 600px) {
+              min-width: 100px;
+            }
           }
           .follow-handler {
             text-align: left;
