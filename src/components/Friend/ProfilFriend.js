@@ -82,22 +82,17 @@ const ProfilFriend = ( { uidFriend } ) => {
                 if(uid) dispatch(getNotifs(uid))
             } 
         }
-        // console.log(userDataFriend);
-        // console.log(postUser);
-        // console.log(uid);
 
-        
-        // if(userDataFriend) console.log(roomChat);
-        
-        return () => {
+        setTimeout(() => {
             console.log(roomChat);
-            
-        }
-            // isEmpty(roomChat) && createRoomAndNotif()          
-        
+        }, 2000) 
+
+        // return (
+        //     isEmpty(roomChat) && createRoomAndNotif()          
+        // )
            
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [loadMessages, uid, loadData, dispatch, uidFriend, count, blocked, roomChat]) 
+    }, [loadMessages, uid, loadData, dispatch, uidFriend, count, blocked]) 
     
     return (
         <>
