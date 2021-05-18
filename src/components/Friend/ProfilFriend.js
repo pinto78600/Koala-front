@@ -83,11 +83,13 @@ const ProfilFriend = ( { uidFriend } ) => {
             } 
         }
 
-        if(userDataFriend) console.log(roomChat);
-
-        return (
-            isEmpty(roomChat) && createRoomAndNotif()          
-        )
+        
+        return () => {
+            console.log(roomChat);
+            
+        }
+            // isEmpty(roomChat) && createRoomAndNotif()          
+        
            
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [loadMessages, uid, loadData, dispatch, uidFriend, count, blocked]) 
