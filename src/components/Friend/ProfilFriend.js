@@ -13,7 +13,6 @@ import Card from '../Post/Card';
 import { blockUser, unblockUser } from '../../actions/user.actions';
 
 const ProfilFriend = ( { uidFriend } ) => {
-    const [isLoading, setIsLoading] = useState(true);
     const [count, setCount] = useState(10);
     const [loadMessages, setLoadMessages] = useState(false);
     const [loadData, SetLoadData] = useState(false);  
@@ -44,26 +43,18 @@ const ProfilFriend = ( { uidFriend } ) => {
         }).catch(err => console.log(err))
     }
     
-    const handleCreate = e => {
-        e.preventDefault();
-        createRoomAndNotif();
-        setIsLoading(false);
-    }
-    
     const handleBlocked = () => {
         setBlocked(true);
         dispatch(blockUser(uidFriend, uid));
     }
-
+    
     const handleUnblocked = () => {
         setBlocked(false);
         dispatch(unblockUser(uidFriend, uid));
     }
     
     
-    useEffect(() => {
-        console.log(blocked);
-        
+    useEffect(() => {        
         if(uidFriend) dispatch(getPostUser(uidFriend));
         
         if(loadMessages){
@@ -91,10 +82,10 @@ const ProfilFriend = ( { uidFriend } ) => {
                 if(uid) dispatch(getNotifs(uid))
             } 
         }
-
-        
+        isEmpty(roomChat) && createRoomAndNotif();
+           
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [loadMessages, isLoading, uid, loadData, dispatch, uidFriend, count, blocked]) 
+    }, [loadMessages, uid, loadData, dispatch, uidFriend, count, blocked]) 
     
     return (
         <>
@@ -131,9 +122,6 @@ const ProfilFriend = ( { uidFriend } ) => {
                             {!blocked && (
                                 <button onClick={handleBlocked} >Bloqué</button>
                             )}  
-                            {isEmpty(roomChat) &&  <form action='' onSubmit={handleCreate}>
-                                        <input type='submit' value='Envoyer message' />
-                                        </form>}
                         </div>
                         <div className='right-part' >
                             <div className='bio-update' >
