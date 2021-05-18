@@ -87,17 +87,17 @@ const ProfilFriend = ( { uidFriend } ) => {
         // console.log(uid);
 
         
-        if(userDataFriend) console.log(roomChat);
+        // if(userDataFriend) console.log(roomChat);
         
-        // return () => {
-        //     // console.log(roomChat);
+        return () => {
+            console.log(roomChat);
             
-        // }
+        }
             // isEmpty(roomChat) && createRoomAndNotif()          
         
            
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [loadMessages, uid, loadData, dispatch, uidFriend, count, blocked]) 
+    }, [loadMessages, uid, loadData, dispatch, uidFriend, count, blocked, roomChat]) 
     
     return (
         <>
