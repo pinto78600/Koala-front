@@ -82,6 +82,9 @@ const ProfilFriend = ( { uidFriend } ) => {
                 if(uid) dispatch(getNotifs(uid))
             } 
         }
+
+        if(uid) console.log(roomChat);
+
         return (
             isEmpty(roomChat) && createRoomAndNotif()          
         )
