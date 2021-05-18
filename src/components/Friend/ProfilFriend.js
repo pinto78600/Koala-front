@@ -18,7 +18,6 @@ const ProfilFriend = ( { uidFriend } ) => {
     const [loadMessages, setLoadMessages] = useState(false);
     const [loadData, SetLoadData] = useState(false);  
     const [blocked, setBlocked] = useState(false);  
-    const [nameButtonBlock, setNameButtonBlock] = useState();
     
     const uid = useContext(UidContext);
     
@@ -52,18 +51,18 @@ const ProfilFriend = ( { uidFriend } ) => {
     }
     
     const handleBlocked = () => {
-        if(!blocked){
-            dispatch(blockUser(uidFriend, uid));
-            setBlocked(true);
-        } 
-        else{
-            dispatch(unblockUser(uidFriend, uid));
-            setBlocked(false);
-        } 
+        setBlocked(true);
+        dispatch(blockUser(uidFriend, uid));
+    }
+
+    const handleUnblocked = () => {
+        setBlocked(false);
+        dispatch(unblockUser(uidFriend, uid));
     }
     
     
     useEffect(() => {
+        console.log(blocked);
         
         if(uidFriend) dispatch(getPostUser(uidFriend));
         
@@ -77,17 +76,6 @@ const ProfilFriend = ( { uidFriend } ) => {
                 dispatch(getUserFriend(uidFriend));
                 await dispatch(getRoomChat(uid, uidFriend, count));
                 SetLoadData(true);
-                if(userDataFriend.blocked){
-                    if(userDataFriend.blocked.includes(uid)){
-                        setBlocked(true);
-                        setNameButtonBlock('Débloqué');
-                    } 
-                    else {
-                        setBlocked(false); 
-                        setNameButtonBlock('Bloqué');
-                    } 
-                }
-                
             } 
         }
         roomAsync()
@@ -108,7 +96,6 @@ const ProfilFriend = ( { uidFriend } ) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [loadMessages, isLoading, uid, loadData, dispatch, uidFriend, count, blocked]) 
     
-    
     return (
         <>
             <div className='profile-container'>
@@ -122,8 +109,8 @@ const ProfilFriend = ( { uidFriend } ) => {
                 (
                     !loadData ? (
                         <div className='icon' >
-                        <i className='fas fa-spinner fa-pulse'></i>
-                    </div>
+                            <i className='fas fa-spinner fa-pulse'></i>
+                        </div>
                     )
                     :
                     (
@@ -137,8 +124,13 @@ const ProfilFriend = ( { uidFriend } ) => {
                         <div className='left-part'>
                             <h3>Photo de profil</h3>
                             <img src={userDataFriend.picture} alt='picUserFriend'/>
-                            <h1><FollowHandler idToFollow={userDataFriend._id} type={'suggestion'} /></h1> 
-                            <button onClick={handleBlocked} >{nameButtonBlock}</button>
+                            <h1><FollowHandler idToFollow={userDataFriend._id} type={'suggestion'} /></h1>
+                            {blocked && (
+                                <button onClick={handleUnblocked} >Débloqué</button>
+                            )}
+                            {!blocked && (
+                                <button onClick={handleBlocked} >Bloqué</button>
+                            )}  
                             {isEmpty(roomChat) &&  <form action='' onSubmit={handleCreate}>
                                         <input type='submit' value='Envoyer message' />
                                         </form>}
