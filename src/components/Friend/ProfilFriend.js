@@ -139,6 +139,9 @@ const ProfilFriend = ( { uidFriend } ) => {
                             <img src={userDataFriend.picture} alt='picUserFriend'/>
                             <h1><FollowHandler idToFollow={userDataFriend._id} type={'suggestion'} /></h1> 
                             <button onClick={handleBlocked} >{nameButtonBlock}</button>
+                            {isEmpty(roomChat) &&  <form action='' onSubmit={handleCreate}>
+                                        <input type='submit' value='Envoyer message' />
+                                        </form>}
                         </div>
                         <div className='right-part' >
                             <div className='bio-update' >
@@ -152,15 +155,8 @@ const ProfilFriend = ( { uidFriend } ) => {
                     </div>
                     <div className='container-post-chat' >
                         <div className='chat-user' >
-                            {isEmpty(roomChat) ? (
-                                    <form action='' onSubmit={handleCreate}>
-                                    <input type='submit' value='Envoyer message' />
-                                    </form>
-                                )
-                                :
-                                (
-                                    
-                                    <ChatRoom 
+                            {!isEmpty(roomChat) && (
+                                  <ChatRoom 
                                         roomChat={roomChat} 
                                         count={count} 
                                         setCount={setCount}

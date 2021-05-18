@@ -8,6 +8,7 @@ import DeleteCard from './DeleteCard';
 import CardComment from './CardComment';
 import { NavLink } from 'react-router-dom';
 import PostShare from './PostShare';
+import { FaHandPointer } from 'react-icons/fa';
 
 const Card = ({ post }) => {
     const [isLoading, setIsLoading] = useState(true);
@@ -94,6 +95,12 @@ const Card = ({ post }) => {
                         <span>{dateParser(post.createdAt)}</span>
                     </div>
                     {isUpdated === false && <p>{post.message}</p>}
+                    {post.link && (
+                        <div className='link-post' >
+                            <a href={post.link} target='_blank' rel="noreferrer">{post.link}</a>
+                            <FaHandPointer size='1em' />
+                        </div>
+                    )}
                     {isUpdated &&(
                         <div className='update-post' >
                             <textarea defaultValue={post.message} onChange={e => setTextUpdated(e.target.value)} />
@@ -135,6 +142,12 @@ const Card = ({ post }) => {
                                     <span>{dateParser(post.share[0].timestamp)}</span>
                                 </div>
                                 <p>{post.share[0].sharedMessage}</p>
+                                {post.share[0].sharedLink && (
+                                    <div className='link-post' >
+                                        <a href={post.share[0].sharedLink} target='_blank' rel="noreferrer">{post.share[0].sharedLink}</a>
+                                        <FaHandPointer size='1em' />
+                                    </div>
+                                )}
                                 {post.share[0].sharedPicture !== "" && <img src={post.share[0].sharedPicture} alt='post-pic' className='card-shared-pic' />}
                                 {post.share[0].sharedVideo !== "" && (
                                         <iframe

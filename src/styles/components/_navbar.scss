@@ -27,13 +27,11 @@ nav {
     display: flex;
     width: 100%;
     max-width: 1190px;
-    margin: 0 auto;    height: 45px;
+    margin: 0 auto;    
+    height: 45px;
     align-items: center;
-    
-    @media screen and(min-width: 1251px) {
-    justify-content:space-around;
-    }
-    
+    justify-content: space-evenly;
+
     .logo {
       display: flex;
       align-items: center;
@@ -61,7 +59,7 @@ nav {
         transform: translateY(2px);
 
         img{
-          margin: 80px;
+          margin: 20px;
         }
         
         h5 {
