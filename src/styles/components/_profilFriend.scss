@@ -48,14 +48,14 @@
         .post-user{
             width: 50%;
         }
-        .chat-user{
+        #chat-user{
             width: 50%;
         }
         @media screen and(max-width: 840px) {
             display: flex;
             flex-direction: column;
             align-items: center;   
-            .chat-user{
+            #chat-user{
                 width: 90%;
             }
             .post-user{

@@ -56,7 +56,8 @@ const ProfilFriend = ( { uidFriend } ) => {
     const handleCreate = e => {
         e.preventDefault();
         createRoomAndNotif();
-        dispatch(getRoomChat(uid, uidFriend, count))
+        dispatch(getRoomChat(uid, uidFriend, count));
+        document.getElementById('chat-user').scrollIntoView();
     }
     
     
@@ -143,7 +144,7 @@ const ProfilFriend = ( { uidFriend } ) => {
                         </div>
                     </div>
                     <div className='container-post-chat' >
-                        <div className='chat-user' >
+                        <div id='chat-user' >
                             {!isEmpty(roomChat) && (
                                   <ChatRoom 
                                         roomChat={roomChat} 
