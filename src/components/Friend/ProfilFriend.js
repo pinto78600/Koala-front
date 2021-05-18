@@ -16,7 +16,7 @@ const ProfilFriend = ( { uidFriend } ) => {
     const [count, setCount] = useState(10);
     const [loadMessages, setLoadMessages] = useState(false);
     const [loadData, SetLoadData] = useState(false);  
-    const [blocked, setBlocked] = useState(false);  
+    const [blocked, setBlocked] = useState(false);
     
     const uid = useContext(UidContext);
     
@@ -52,6 +52,13 @@ const ProfilFriend = ( { uidFriend } ) => {
         setBlocked(false);
         dispatch(unblockUser(uidFriend, uid));
     }
+
+    const handleCreate = e => {
+        e.preventDefault();
+        createRoomAndNotif();
+        dispatch(getRoomChat(uid, uidFriend, count))
+    }
+    
     
     
     useEffect(() => {        
@@ -82,14 +89,6 @@ const ProfilFriend = ( { uidFriend } ) => {
                 if(uid) dispatch(getNotifs(uid))
             } 
         }
-
-        setTimeout(() => {
-            console.log(roomChat);
-        }, 2000) 
-
-        // return (
-        //     isEmpty(roomChat) && createRoomAndNotif()          
-        // )
            
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [loadMessages, uid, loadData, dispatch, uidFriend, count, blocked]) 
@@ -128,8 +127,10 @@ const ProfilFriend = ( { uidFriend } ) => {
                             )}
                             {!blocked && (
                                 <button onClick={handleBlocked} >Bloqué</button>
-                            )}  
-                        </div>
+                            )}
+                            {isEmpty(roomChat) &&  <form action='' onSubmit={handleCreate}>
+                                        <input type='submit' value='Envoyer message' />
+                                        </form>}                        </div>
                         <div className='right-part' >
                             <div className='bio-update' >
                                 <h3>Bio</h3>
