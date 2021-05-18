@@ -165,8 +165,11 @@ const Card = ({ post }) => {
                     ) 
                 
                     }
-
-                    {post.picture && <img src={post.picture} alt="card-pic" className='card-pic'/>}
+                    {post.picture && (
+                        <a href={post.picture} target='_blank' rel="noreferrer" >
+                            <img src={post.picture} alt="card-pic" className='card-pic'/>
+                        </a>
+                    )}
                     {post.video && (
                         <iframe
                             width='500'
