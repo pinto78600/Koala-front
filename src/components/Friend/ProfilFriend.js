@@ -83,7 +83,7 @@ const ProfilFriend = ( { uidFriend } ) => {
             } 
         }
 
-        if(uid) console.log(roomChat);
+        if(userDataFriend) console.log(roomChat);
 
         return (
             isEmpty(roomChat) && createRoomAndNotif()          
