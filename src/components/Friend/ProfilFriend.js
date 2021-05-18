@@ -87,12 +87,12 @@ const ProfilFriend = ( { uidFriend } ) => {
         // console.log(uid);
 
         
+        if(userDataFriend) console.log(roomChat);
         
-        return () => {
-            if(userDataFriend) console.log(roomChat);
-            // console.log(roomChat);
+        // return () => {
+        //     // console.log(roomChat);
             
-        }
+        // }
             // isEmpty(roomChat) && createRoomAndNotif()          
         
            
