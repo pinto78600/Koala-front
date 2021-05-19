@@ -92,7 +92,7 @@ const ProfilFriend = ( { uidFriend } ) => {
         }
            
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [loadMessages, uid, loadData, dispatch, uidFriend, count, blocked, handleCreate]) 
+    }, [loadMessages, uid, loadData, dispatch, uidFriend, count, blocked]) 
     
     return (
         <>
