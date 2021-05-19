@@ -53,21 +53,14 @@ const ProfilFriend = ( { uidFriend } ) => {
         dispatch(unblockUser(uidFriend, uid));
     }
 
-    const handleCreate = e => {
+    const handleCreate = async (e) => {
         e.preventDefault();
-        createRoomAndNotif();
-        roomAsync()
+        await createRoomAndNotif();
+        dispatch(getRoomChat(uid, uidFriend, count))
         document.getElementById('chat-user').scrollIntoView();
     }
     
     
-    const roomAsync = async () => {
-        if(uid && uidFriend){
-            dispatch(getUserFriend(uidFriend));
-            await dispatch(getRoomChat(uid, uidFriend, count));
-            SetLoadData(true);
-        } 
-    }
     
     useEffect(() => {        
         if(uidFriend) dispatch(getPostUser(uidFriend));
@@ -76,6 +69,13 @@ const ProfilFriend = ( { uidFriend } ) => {
             setCount(count + 10);
             setLoadMessages(false)
             
+        }
+        const roomAsync = async () => {
+            if(uid && uidFriend){
+                dispatch(getUserFriend(uidFriend));
+                await dispatch(getRoomChat(uid, uidFriend, count));
+                SetLoadData(true);
+            } 
         }
         roomAsync()
         if(!isEmpty(roomChat)){
