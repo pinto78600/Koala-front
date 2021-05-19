@@ -57,6 +57,14 @@
             margin: 8px auto;
             position: relative;
             min-height: 100px;
+
+            iframe {
+                height: 56px;
+                width: 56px;
+                border-radius: 20px;
+                object-fit: cover;
+                box-shadow: 0 0 4px rgba(51, 51, 51, 0.233);
+            }
             
             
             .card-left-shared{    
