@@ -55,12 +55,19 @@ const ProfilFriend = ( { uidFriend } ) => {
 
     const handleCreate = async (e) => {
         e.preventDefault();
-        await createRoomAndNotif();
-        dispatch(getRoomChat(uid, uidFriend, count))
+        createRoomAndNotif();
+        roomAsync()
         document.getElementById('chat-user').scrollIntoView();
     }
     
     
+    const roomAsync = async () => {
+        if(uid && uidFriend){
+            dispatch(getUserFriend(uidFriend));
+            await dispatch(getRoomChat(uid, uidFriend, count));
+            SetLoadData(true);
+        } 
+    }
     
     useEffect(() => {        
         if(uidFriend) dispatch(getPostUser(uidFriend));
@@ -70,14 +77,13 @@ const ProfilFriend = ( { uidFriend } ) => {
             setLoadMessages(false)
             
         }
-        const roomAsync = async () => {
-            if(uid && uidFriend){
-                dispatch(getUserFriend(uidFriend));
-                await dispatch(getRoomChat(uid, uidFriend, count));
-                SetLoadData(true);
-            } 
-        }
         roomAsync()
+           
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [loadMessages, uid, loadData, dispatch, uidFriend, count, blocked])
+    
+    
+    useEffect(() => {
         if(!isEmpty(roomChat)){
             const notifs = roomChat.data[0].notifications;
             const arrNotifs = notifs.map(notif => {
@@ -88,11 +94,10 @@ const ProfilFriend = ( { uidFriend } ) => {
             if(!isEmpty(arrNotifs) && roomChat.data[0]._id) {
                 dispatch(deleteNotifs(roomChat.data[0]._id, uidFriend))
                 if(uid) dispatch(getNotifs(uid))
-            } 
+            }
         }
-           
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [loadMessages, uid, loadData, dispatch, uidFriend, count, blocked]) 
+    },[handleCreate, dispatch, uid, uidFriend])
     
     return (
         <>
@@ -123,13 +128,15 @@ const ProfilFriend = ( { uidFriend } ) => {
                             <h3>Photo de profil</h3>
                             <img src={userDataFriend.picture} alt='picUserFriend'/>
                             <h1><FollowHandler idToFollow={userDataFriend._id} type={'suggestion'} /></h1>
-                            {blocked && (
-                                <button onClick={handleUnblocked} >Débloqué</button>
-                            )}
-                            {!blocked && (
-                                <button onClick={handleBlocked} >Bloqué</button>
-                            )}
-                            {isEmpty(roomChat) &&  <button onClick={handleCreate}>Envoyer message</button> }                   
+                            <div className='button-chat' >
+                                {blocked && (
+                                    <button onClick={handleUnblocked} >Débloqué</button>
+                                )}
+                                {!blocked && (
+                                    <button onClick={handleBlocked} >Bloqué</button>
+                                )}
+                                {isEmpty(roomChat) &&  <button onClick={handleCreate}>Envoyer message</button> }                   
+                            </div>
                         </div>
                         <div className='right-part' >
                             <div className='bio-update' >
