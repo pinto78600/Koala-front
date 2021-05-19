@@ -53,10 +53,10 @@ const ProfilFriend = ( { uidFriend } ) => {
         dispatch(unblockUser(uidFriend, uid));
     }
 
-    const handleCreate = e => {
+    const handleCreate = async(e) => {
         e.preventDefault();
         createRoomAndNotif();
-        dispatch(getRoomChat(uid, uidFriend, count));
+        await dispatch(getRoomChat(uid, uidFriend, count));
         document.getElementById('chat-user').scrollIntoView();
     }
     
