@@ -129,9 +129,7 @@ const ProfilFriend = ( { uidFriend } ) => {
                             {!blocked && (
                                 <button onClick={handleBlocked} >Bloqué</button>
                             )}
-                            {isEmpty(roomChat) &&  <form action='' onSubmit={handleCreate}>
-                                        <input type='submit' value='Envoyer message' />
-                                        </form>}                        
+                            {isEmpty(roomChat) &&  <button onClick={handleCreate}>Envoyer message</button> }                   
                         </div>
                         <div className='right-part' >
                             <div className='bio-update' >
