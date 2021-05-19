@@ -61,6 +61,11 @@ const ProfilFriend = ( { uidFriend } ) => {
         document.getElementById('chat-user').scrollIntoView();
     }
     
+    if(loadMessages){
+                setCount(count + 10);
+                setLoadMessages(false)
+                
+            }
     
     useEffect(() => {        
         if(uidFriend) dispatch(getPostUser(uidFriend));
@@ -87,8 +92,7 @@ const ProfilFriend = ( { uidFriend } ) => {
         }
            
         // eslint-disable-next-line react-hooks/exhaustive-deps
-        
-    }, [loadMessages, uid, dispatch, uidFriend, blocked]) 
+    }, [loadMessages, uid, dispatch, uidFriend, blocked, count]) 
 
     useEffect(() => {
         if(displayRoom){
@@ -98,15 +102,7 @@ const ProfilFriend = ( { uidFriend } ) => {
                 SetLoadData(true);
         }
         }
-    }, [displayRoom, uid, uidFriend])
-
-    useEffect(() => {
-        if(loadMessages){
-                    setCount(count + 10);
-                    setLoadMessages(false)
-                    
-                }
-    }, [loadMessages, count])
+    }, [displayRoom, uid, uidFriend, count, dispatch])
 
 
     return (
