@@ -58,18 +58,17 @@ const ProfilFriend = ( { uidFriend } ) => {
     const handleCreate = e => {
         e.preventDefault();
         createRoomAndNotif();
-        document.getElementById('chat-user').scrollIntoView();
     }
     
     if(loadMessages){
-                setCount(count + 10);
-                setLoadMessages(false)
-                
-            }
+        setCount(count + 10);
+        setLoadMessages(false)
+        
+    }
     
     useEffect(() => {        
         if(uidFriend) dispatch(getPostUser(uidFriend));
-
+        
         const roomAsync = async () => {
             if(uid && uidFriend){
                 dispatch(getUserFriend(uidFriend));
@@ -90,21 +89,20 @@ const ProfilFriend = ( { uidFriend } ) => {
                 if(uid) dispatch(getNotifs(uid))
             } 
         }
-           
+        
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [loadMessages, uid, dispatch, uidFriend, blocked, count]) 
-
+    
     useEffect(() => {
         if(displayRoom){
-           if(uid && uidFriend){
-                dispatch(getUserFriend(uidFriend));
+            if(uid && uidFriend){
                 dispatch(getRoomChat(uid, uidFriend, count));
-                SetLoadData(true);
-        }
+                document.getElementById('chat-user').scrollIntoView();
+            }
         }
     }, [displayRoom, uid, uidFriend, count, dispatch])
-
-
+    
+    
     return (
         <>
             <div className='profile-container'>
