@@ -17,6 +17,7 @@ const ProfilFriend = ( { uidFriend } ) => {
     const [loadMessages, setLoadMessages] = useState(false);
     const [loadData, SetLoadData] = useState(false);  
     const [blocked, setBlocked] = useState(false);
+    const [displayRoom, setDisplayRoom] = useState(false);
     
     const uid = useContext(UidContext);
     
@@ -39,6 +40,7 @@ const ProfilFriend = ( { uidFriend } ) => {
         })
         .then(res => {
             if(res.data.errors) console.log(res.data.errors);
+            else setDisplayRoom(true);
             
         }).catch(err => console.log(err))
     }
@@ -52,14 +54,20 @@ const ProfilFriend = ( { uidFriend } ) => {
         setBlocked(false);
         dispatch(unblockUser(uidFriend, uid));
     }
-
+    
     const handleCreate = e => {
         e.preventDefault();
         createRoomAndNotif();
-        await dispatch(getRoomChat(uid, uidFriend, count))
         document.getElementById('chat-user').scrollIntoView();
     }
     
+    const roomAsync = async () => {
+        if(uid && uidFriend){
+            dispatch(getUserFriend(uidFriend));
+            await dispatch(getRoomChat(uid, uidFriend, count));
+            SetLoadData(true);
+        } 
+    }
     
     
     useEffect(() => {        
@@ -69,13 +77,6 @@ const ProfilFriend = ( { uidFriend } ) => {
             setCount(count + 10);
             setLoadMessages(false)
             
-        }
-        const roomAsync = async () => {
-            if(uid && uidFriend){
-                dispatch(getUserFriend(uidFriend));
-                await dispatch(getRoomChat(uid, uidFriend, count));
-                SetLoadData(true);
-            } 
         }
         roomAsync()
         if(!isEmpty(roomChat)){
@@ -94,8 +95,13 @@ const ProfilFriend = ( { uidFriend } ) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [loadMessages, uid, loadData, dispatch, uidFriend, count, blocked]) 
 
-    console.log(roomChat);
-    
+    useEffect(() => {
+        if(displayRoom){
+            roomAsync()
+        }
+    }, [displayRoom, roomAsync, uid, uidFriend])
+
+
     return (
         <>
             <div className='profile-container'>
